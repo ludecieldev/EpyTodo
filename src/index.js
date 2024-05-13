@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 app.use(express.json());
 
@@ -9,9 +9,9 @@ const userRoutes = require('./routes/user/user');
 const todoRoutes = require('./routes/todos/todos');
 const authRoutes = require('./routes/auth/auth');
 
-app.use('/api/users', userRoutes);
-app.use('/api/todos', todoRoutes);
-app.use('/api/auth', authRoutes);
+app.use('./routes/users', userRoutes);
+app.use('./routes/todos', todoRoutes);
+app.use('./routes/auth', authRoutes);
 
 // 404 Not Found Middleware
 app.use((req, res, next) => {
