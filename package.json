@@ -1,12 +1,13 @@
 {
   "name": "b-web-200-lil-2-1-epytodo-alexandre.garbe",
   "version": "1.0.0",
+  "description": "Project back-end with Express. Handle authetification and tokens.",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node .src/index.js",
+    "dev": "nodemon .src/index.js"
   },
-  "author": "Your Name",
+  "author": "Julien MARS Alexandre GARBE",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -27,6 +28,5 @@
     "url": "https://github.com/EpitechPromo2028/B-WEB-200-LIL-2-1-epytodo-alexandre.garbe/issues"
   },
   "homepage": "https://github.com/EpitechPromo2028/B-WEB-200-LIL-2-1-epytodo-alexandre.garbe#readme",
-  "keywords": [],
-  "description": ""
+  "keywords": []
 }
