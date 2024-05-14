@@ -13,7 +13,6 @@ app.use('./routes/users', userRoutes);
 app.use('./routes/todos', todoRoutes);
 app.use('./routes/auth', authRoutes);
 
-// 404 Not Found Middleware
 app.use((req, res, next) => {
     res.status(404).json({
         error: 'Not Found',
