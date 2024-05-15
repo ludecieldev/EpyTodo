@@ -1,11 +1,11 @@
 {
   "name": "b-web-200-lil-2-1-epytodo-alexandre.garbe",
   "version": "1.0.0",
-  "description": "Project back-end with Express. Handle authetification and tokens.",
+  "description": "Epytodo project great project",
   "main": "src/index.js",
   "scripts": {
-    "start": "node .src/index.js",
-    "dev": "nodemon .src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "Julien MARS Alexandre GARBE",
   "license": "ISC",
