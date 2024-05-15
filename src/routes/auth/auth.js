@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 router.post('/register', async (req, res) => {
     const { email, name, firstname, password } = req.body;
     try {
-        // Check if user already exists
         const [user] = await db.query('SELECT id FROM user WHERE email = ?', [email]);
         if (user.length > 0) {
             return res.status(409).json({ msg: "User already exists" });
@@ -28,7 +27,6 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
-        // Check if user exists
         const [users] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
         if (users.length === 0) {
             return res.status(404).json({ msg: "User not found" });
