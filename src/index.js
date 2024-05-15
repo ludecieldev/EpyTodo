@@ -1,7 +1,7 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 3000;
+require('dotenv').config();
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -9,15 +9,13 @@ const userRoutes = require('./routes/user/user');
 const todoRoutes = require('./routes/todos/todos');
 const authRoutes = require('./routes/auth/auth');
 
-app.use('./routes/users', userRoutes);
-app.use('./routes/todos', todoRoutes);
-app.use('./routes/auth', authRoutes);
+app.use('/', authRoutes);
+app.use('/users', userRoutes);
+app.use('/user', userRoutes);
+app.use('/todos', todoRoutes);
 
-app.use((req, res, next) => {
-    res.status(404).json({
-        error: 'Not Found',
-        message: 'The requested resource was not found on this server.'
-    });
+app.get('/', (req, res) => {
+    res.status(200).send('Welcome to the API!');
 });
 
 app.use((err, req, res, next) => {
