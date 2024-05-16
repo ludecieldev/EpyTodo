@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../../config/db'); // Ensure the database configuration is correctly set up
+const db = require('../../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 router.post('/register', async (req, res) => {
     const { email, name, firstname, password } = req.body;
+    if (!email || !name || !firstname || !password) {
+        return res.status(400).json({ msg: "All fields are required" });
+    }
     try {
         const [user] = await db.query('SELECT id FROM user WHERE email = ?', [email]);
         if (user.length > 0) {
@@ -26,6 +29,9 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ msg: "All fields are required" });
+    }
     try {
         const [users] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
         if (users.length === 0) {
