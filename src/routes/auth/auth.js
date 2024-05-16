@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 router.post('/register', async (req, res) => {
     const { email, name, firstname, password } = req.body;
     if (!email || !name || !firstname || !password) {
-        return res.status(400).json({ msg: "All fields are required" });
+        return res.status(400).json({ msg: "Bad parameter" });
     }
     try {
         const [user] = await db.query('SELECT id FROM user WHERE email = ?', [email]);
@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-        return res.status(400).json({ msg: "All fields are required" });
+        return res.status(400).json({ msg: "Bad parameter" });
     }
     try {
         const [users] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
