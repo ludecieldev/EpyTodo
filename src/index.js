@@ -18,11 +18,16 @@ app.get('/', (req, res) => {
     res.status(200).send('Welcome to the API!');
 });
 
+app.use((req, res, next) => {
+    res.status(404).json({
+        msg: 'Not found'
+    });
+});
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({
-        error: 'Internal Server Error',
-        message: 'Something broke on the server!'
+        msg: 'Internal server error'
     });
 });
 
