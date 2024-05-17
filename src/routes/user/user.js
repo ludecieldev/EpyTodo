@@ -4,16 +4,13 @@ const db = require('../../config/db');
 const authenticateToken = require('../../middleware/auth');
 
 router.get('/todos', authenticateToken, async (req, res) => {
+    const { user_id } = req.user;
+    if (!user_id) {
+        return res.status(400).json({ msg: "Bad parameter" });
+    }
     try {
-        const userId = req.user.user_id;
-        if (!userId) {
-            return res.status(401).json({ msg: "Unauthorized" });
-        }
-        const [todos] = await db.query('SELECT * FROM todo WHERE user_id = ?', [userId]);
-        if (todos.length === 0) {
-            return res.status(404).json({ msg: "Not found" });
-        }
-        res.json(todos);
+        const [results] = await db.query('SELECT * FROM todo WHERE user_id = ?', [user_id]);
+        res.json(results);
     } catch (error) {
         res.status(500).json({ msg: "Internal server error" });
     }
@@ -63,9 +60,8 @@ router.delete('/:id', authenticateToken, async (req, res) => {
         return res.status(400).json({ msg: "Bad parameter" });
     }
     try {
-        await db.query('DELETE FROM todo WHERE user_id = ?', [id]);
-        const [result] = await db.query('DELETE FROM user WHERE id = ?', [id]);
-        if (result.affectedRows > 0) {
+        const [results] = await db.query('DELETE FROM user WHERE id = ?', [id]);
+        if (results.affectedRows > 0) {
             res.json({ msg: "User deleted successfully" });
         } else {
             res.status(404).json({ msg: "Not found" });
